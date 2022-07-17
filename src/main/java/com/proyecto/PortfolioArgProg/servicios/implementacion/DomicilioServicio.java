@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.proyecto.PortfolioArgProg.servicios;
+package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
 /**
  *
  * @author Barbara
  */
-public class UsuarioServicio {
+public class DomicilioServicio {
     
 }

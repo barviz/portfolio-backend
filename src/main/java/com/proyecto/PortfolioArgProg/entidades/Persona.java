@@ -1,93 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.proyecto.PortfolioArgProg.entidades;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
 
 /**
  *
  * @author Barbara
  */
-
+@Data
 @Entity
-@Table(name = "personas")
+@Table(name = "persona")
 public class Persona {
-    
+
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
-    
-    @Column(name = "nombre", length = 60, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "persona_id")
+    private Long id;
+
+    @Column(name = "persona_nombre", length = 45, nullable = false)
     private String nombre;
-    
-    @Column(name = "apellido", length = 60, nullable = false)
+
+    @Column(name = "persona_apellido", length = 45, nullable = false)
     private String apellido;
 
-    @Column(name = "titulo", length = 60, nullable = false)
+    @Column(name = "persona_titulo", length = 45, nullable = false)
     private String titulo;
-    
-    @Column(name = "ubicacion", length = 60, nullable = false)
+
+    @Column(name = "persona_ubicacion", length = 45, nullable = false)
     private String ubicacion;
     
-    public Persona() {
-    }
-
-    public Persona(String nombre, String apellido, String titulo, String ubicacion) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.titulo = titulo;
-        this.ubicacion = ubicacion;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
+    @Column(name = "persona_descripcion", length = 1000, nullable = false)
+    private String descripcion;
     
+//    @Column(name = "persona_img_url_perfil", length = 200, nullable = false)
+//    private String img_url_perfil;
+    
+//    @Column(name = "persona_img_url_banner", length = 200, nullable = false)
+//    private String img_url_banner;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "imagen_identidad_id", nullable = false)
+    private ImagenIdentidad imagenIdentidad;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "imagen_banner_id", nullable = false)
+    private ImagenBanner imagenBanner;
+
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@Column(name = "persona_img_perfil", length = 200, nullable = false)
+//    private String imagenPerfil;
+//    
