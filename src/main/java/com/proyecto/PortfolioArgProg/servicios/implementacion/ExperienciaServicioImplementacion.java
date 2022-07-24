@@ -2,9 +2,7 @@ package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
 import com.proyecto.PortfolioArgProg.dtos.ExperienciaDto;
 import com.proyecto.PortfolioArgProg.entidades.Experiencia;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
 import com.proyecto.PortfolioArgProg.repositorios.ExperienciaRepositorio;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
 import com.proyecto.PortfolioArgProg.servicios.interfaces.ExperienciaServicioInterfaz;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +19,8 @@ public class ExperienciaServicioImplementacion implements ExperienciaServicioInt
     @Autowired
     public ExperienciaRepositorio experienciaRepositorio;
 
-    @Autowired
-    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//    @Autowired
+//    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
 
     @Override
     public Experiencia crearExperiencia(ExperienciaDto dto) {
@@ -34,12 +32,12 @@ public class ExperienciaServicioImplementacion implements ExperienciaServicioInt
         experiencia.setDescripcion(dto.getDescripcion());
         experiencia.setAnio_inicio(dto.getAnio_inicio());
         experiencia.setAnio_fin(dto.getAnio_fin());
-//        experiencia.setImg_url(dto.getImg_url());
+        experiencia.setImg_url_logo(dto.getImg_url_logo());
 
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-        if (imagenIdentidadOpt.isPresent()) {
-            experiencia.setImagenIdentidad(imagenIdentidadOpt.get());
-        }
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//        if (imagenIdentidadOpt.isPresent()) {
+//            experiencia.setImagenIdentidad(imagenIdentidadOpt.get());
+//        }
 
         experienciaRepositorio.save(experiencia);
 
@@ -60,12 +58,12 @@ public class ExperienciaServicioImplementacion implements ExperienciaServicioInt
             experiencia.setDescripcion((!dto.getDescripcion().isEmpty()) ? dto.getDescripcion() : experiencia.getDescripcion());
             experiencia.setAnio_inicio((dto.getAnio_inicio()!=null) ? dto.getAnio_inicio() : experiencia.getAnio_inicio());
             experiencia.setAnio_fin((dto.getAnio_fin()!=null) ? dto.getAnio_fin() : experiencia.getAnio_fin());
-//            experiencia.setImg_url((!dto.getImg_url().isEmpty()) ? dto.getImg_url() : experiencia.getImg_url());
+            experiencia.setImg_url_logo((!dto.getImg_url_logo().isEmpty()) ? dto.getImg_url_logo() : experiencia.getImg_url_logo());
             
-            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-            if (imagenIdentidadOpt.isPresent()) {
-                experiencia.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():experiencia.getImagenIdentidad());
-            }
+//            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//            if (imagenIdentidadOpt.isPresent()) {
+//                experiencia.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():experiencia.getImagenIdentidad());
+//            }
 
                 experienciaRepositorio.save(experiencia);
 

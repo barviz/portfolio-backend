@@ -1,8 +1,8 @@
 package com.proyecto.PortfolioArgProg.controladores;
 
-import com.proyecto.PortfolioArgProg.dtos.PersonaDto;
-import com.proyecto.PortfolioArgProg.entidades.Persona;
-import com.proyecto.PortfolioArgProg.servicios.implementacion.PersonaServicioImplementacion;
+import com.proyecto.PortfolioArgProg.dtos.PersonaDatosDto;
+import com.proyecto.PortfolioArgProg.entidades.PersonaDatos;
+import com.proyecto.PortfolioArgProg.servicios.implementacion.PersonaDatosServicioImplementacion;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,35 +14,37 @@ import org.springframework.http.ResponseEntity;
  * @author Barbara
  */
 @RestController
-public class PersonaControlador {
+@RequestMapping("/persona-datos")
+@CrossOrigin(origins = "http://localhost:4200")
+public class PersonaDatosControlador {
 
     @Autowired
-    private PersonaServicioImplementacion personaServicioImplementacion;
+    private PersonaDatosServicioImplementacion personaDatosServicioImplementacion;
 
-    @PostMapping(path = "/persona")
-    public ResponseEntity<Persona> crearPersona(@RequestBody PersonaDto dto) {
-        return new ResponseEntity<Persona>(personaServicioImplementacion.crearPersona(dto), HttpStatus.CREATED);
+    @PostMapping(path = "/crear")
+    public ResponseEntity<PersonaDatos> crearPersonaDatos(@RequestBody PersonaDatosDto dto) {
+        return new ResponseEntity<PersonaDatos>(personaDatosServicioImplementacion.crearPersonaDatos(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/persona")
-    public ResponseEntity<Persona> actualizarPersona(@RequestBody PersonaDto dto) {
-        return new ResponseEntity<Persona>(personaServicioImplementacion.actualizarPersona(dto), HttpStatus.OK);
+    @PutMapping(path = "/actualizar")
+    public ResponseEntity<PersonaDatos> actualizarPersonaDatos(@RequestBody PersonaDatosDto dto) {
+        return new ResponseEntity<PersonaDatos>(personaDatosServicioImplementacion.actualizarPersonaDatos(dto), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/persona/{id}")
-    public ResponseEntity<String> eliminarPersona(@PathVariable Long id) {
-        personaServicioImplementacion.eliminarPersona(id);
-        return new ResponseEntity<>("Persona eliminada", HttpStatus.OK);
+    @DeleteMapping(path = "/eliminar/{id}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable("id") Long id) {
+        personaDatosServicioImplementacion.eliminarPersonaDatos(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/personas/lista")
-    public ResponseEntity<List> listarPersonas() {
-        return new ResponseEntity<>(personaServicioImplementacion.listarPersonas(), HttpStatus.OK);
+    @GetMapping(path = "/listar")
+    public ResponseEntity<List> listarPersonaDatos() {
+        return new ResponseEntity<>(personaDatosServicioImplementacion.listarPersonaDatos(), HttpStatus.OK);
     }
     
-    @GetMapping(path = "/persona/{id}")
-    public ResponseEntity<Persona> buscarPersonaPorId(@PathVariable Long id) {
-        return new ResponseEntity<>(personaServicioImplementacion.buscarPersonaPorId(id), HttpStatus.ACCEPTED);
+    @GetMapping(path = "/buscar/{id}")
+    public ResponseEntity<PersonaDatos> buscarPersonaDatosPorId(@PathVariable Long id) {
+        return new ResponseEntity<>(personaDatosServicioImplementacion.buscarPersonaDatosPorId(id), HttpStatus.ACCEPTED);
     }
 
 }
@@ -109,7 +111,7 @@ public class PersonaControlador {
 //    }
 //
 //    @PostMapping("")
-//    public ResponseEntity<Persona> save(@RequestBody Persona entity) {
+//    public ResponseEntity<Persona> save(@RequestBody PersonaDatos entity) {
 //        try {
 //            return ResponseEntity.status(HttpStatus.OK).body(personaServicio.crearPersona(archivo1, archivo2, nombre, apellido, titulo, ubicacion));
 //        } catch (Exception e) {
@@ -120,7 +122,7 @@ public class PersonaControlador {
 //    
 //
 //    @PutMapping("/{id}")
-//    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Persona entity) {
+//    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody PersonaDatos entity) {
 //        try {
 //            return ResponseEntity.status(HttpStatus.OK).body(personaServicio.modificarPersona(archivo1, archivo2, id, nombre, apellido, titulo, ubicacion));
 //        } catch (Exception e) {
@@ -139,14 +141,14 @@ public class PersonaControlador {
 //
 //    }
 //    @PostMapping("/new/persona")
-//    public String agregarPersona(@RequestBody Persona persona) {
+//    public String agregarPersona(@RequestBody PersonaDatos persona) {
 //        ipersonaServicio.crearPersona(persona);
 //        return "La persona fue creada correctamente";
 //    }
 //    @PutMapping("/edit/{id}")
-//    public Persona editarPersona(@PathVariable Long id, @RequestParam("nombre") String newNombre, @RequestParam("apellido") String newApellido, @RequestParam("titulo") String newTitulo, @RequestParam("ubicacion") String newUbicacion, @RequestParam("imagenPerfil") String newImagenPerfil, @RequestParam("imagenBanner") String newImagenBanner) {
+//    public PersonaDatos editarPersona(@PathVariable Long id, @RequestParam("nombre") String newNombre, @RequestParam("apellido") String newApellido, @RequestParam("titulo") String newTitulo, @RequestParam("ubicacion") String newUbicacion, @RequestParam("imagenPerfil") String newImagenPerfil, @RequestParam("imagenBanner") String newImagenBanner) {
 //        
-//        Persona persona = ipersonaServicio.buscarPersonaPorId(id);
+//        PersonaDatos persona = ipersonaServicio.buscarPersonaPorId(id);
 //        
 //        persona.setNombre(newNombre);
 //        persona.setApellido(newApellido);
@@ -170,6 +172,6 @@ public class PersonaControlador {
 //    }
 //
 //    @GetMapping("/buscar/{id}")
-//    public Persona buscarPersona(@PathVariable Long id) {
+//    public PersonaDatos buscarPersona(@PathVariable Long id) {
 //        return ipersonaServicio.buscarPersonaPorId(id);
 //    }

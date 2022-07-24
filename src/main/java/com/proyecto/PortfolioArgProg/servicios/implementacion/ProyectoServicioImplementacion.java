@@ -1,9 +1,7 @@
 package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
 import com.proyecto.PortfolioArgProg.dtos.ProyectoDto;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
 import com.proyecto.PortfolioArgProg.entidades.Proyecto;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
 import com.proyecto.PortfolioArgProg.repositorios.ProyectoRepositorio;
 import com.proyecto.PortfolioArgProg.servicios.interfaces.ProyectoServicioInterfaz;
 import java.util.List;
@@ -21,8 +19,8 @@ public class ProyectoServicioImplementacion implements ProyectoServicioInterfaz 
     @Autowired
     public ProyectoRepositorio proyectoRepositorio;
 
-    @Autowired
-    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//    @Autowired
+//    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
 
     @Override
     public Proyecto crearProyecto(ProyectoDto dto) {
@@ -33,12 +31,12 @@ public class ProyectoServicioImplementacion implements ProyectoServicioInterfaz 
         proyecto.setDescripcion(dto.getDescripcion());
         proyecto.setLink(dto.getLink());
         proyecto.setAnio(dto.getAnio());
-//        proyecto.setImg_url(dto.getImg_url());
+        proyecto.setImg_url_logo(dto.getImg_url_logo());
 
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-        if (imagenIdentidadOpt.isPresent()) {
-            proyecto.setImagenIdentidad(imagenIdentidadOpt.get());
-        }
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//        if (imagenIdentidadOpt.isPresent()) {
+//            proyecto.setImagenIdentidad(imagenIdentidadOpt.get());
+//        }
 
         proyectoRepositorio.save(proyecto);
 
@@ -57,13 +55,13 @@ public class ProyectoServicioImplementacion implements ProyectoServicioInterfaz 
             proyecto.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : proyecto.getNombre());
             proyecto.setDescripcion((!dto.getDescripcion().isEmpty()) ? dto.getDescripcion() : proyecto.getDescripcion());
             proyecto.setLink((!dto.getLink().isEmpty()) ? dto.getLink() : proyecto.getLink());
-//            proyecto.setAnio((dto.getAnio() != null) ? dto.getAnio() : proyecto.getAnio());
-//            proyecto.setImg_url((!dto.getImg_url().isEmpty()) ? dto.getImg_url() : proyecto.getImg_url());
+            proyecto.setAnio((dto.getAnio() != null) ? dto.getAnio() : proyecto.getAnio());
+            proyecto.setImg_url_logo((!dto.getImg_url_logo().isEmpty()) ? dto.getImg_url_logo() : proyecto.getImg_url_logo());
 
-            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-            if (imagenIdentidadOpt.isPresent()) {
-                proyecto.setImagenIdentidad((dto.getImagenIdentidad() != null) ? imagenIdentidadOpt.get() : proyecto.getImagenIdentidad());
-            }
+//            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//            if (imagenIdentidadOpt.isPresent()) {
+//                proyecto.setImagenIdentidad((dto.getImagenIdentidad() != null) ? imagenIdentidadOpt.get() : proyecto.getImagenIdentidad());
+//            }
 
             proyectoRepositorio.save(proyecto);
 

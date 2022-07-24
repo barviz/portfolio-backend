@@ -2,12 +2,9 @@ package com.proyecto.PortfolioArgProg.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -37,12 +34,12 @@ public class Educacion {
     @Column(name = "educacion_anio_fin")
     private Integer anio_fin;
     
-//    @Column(name = "educacion_img_url", length = 200, nullable = false)
-//    private String img_url;
+    @Column(name = "educacion_img_url_logo", length = 200, nullable = false)
+    private String img_url_logo;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "imagen_identidad_id", nullable = true)
-    private ImagenIdentidad imagenIdentidad;
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "imagen_identidad_id", nullable = true)
+//    private ImagenIdentidad imagenIdentidad;
 
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "persona_id", nullable = true)

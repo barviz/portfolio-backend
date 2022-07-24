@@ -2,9 +2,7 @@ package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
 import com.proyecto.PortfolioArgProg.dtos.EducacionDto;
 import com.proyecto.PortfolioArgProg.entidades.Educacion;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
 import com.proyecto.PortfolioArgProg.repositorios.EducacionRepositorio;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
 import com.proyecto.PortfolioArgProg.servicios.interfaces.EducacionServicioInterfaz;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +19,8 @@ public class EducacionServicioImplementacion implements EducacionServicioInterfa
     @Autowired
     public EducacionRepositorio educacionRepositorio;
 
-    @Autowired
-    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//    @Autowired
+//    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
 
     @Override
     public Educacion crearEducacion(EducacionDto dto) {
@@ -33,12 +31,12 @@ public class EducacionServicioImplementacion implements EducacionServicioInterfa
         educacion.setInstitucion(dto.getInstitucion());
         educacion.setAnio_inicio(dto.getAnio_inicio());
         educacion.setAnio_fin(dto.getAnio_fin());
-//        educacion.setImg_url(dto.getImg_url());
+        educacion.setImg_url_logo(dto.getImg_url_logo());
 
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-        if (imagenIdentidadOpt.isPresent()) {
-            educacion.setImagenIdentidad(imagenIdentidadOpt.get());
-        }
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//        if (imagenIdentidadOpt.isPresent()) {
+//            educacion.setImagenIdentidad(imagenIdentidadOpt.get());
+//        }
 
         educacionRepositorio.save(educacion);
 
@@ -58,12 +56,12 @@ public class EducacionServicioImplementacion implements EducacionServicioInterfa
             educacion.setInstitucion((!dto.getInstitucion().isEmpty()) ? dto.getInstitucion() : educacion.getInstitucion());
             educacion.setAnio_inicio((dto.getAnio_inicio() != null) ? dto.getAnio_inicio() : educacion.getAnio_inicio());
             educacion.setAnio_fin((dto.getAnio_fin() != null) ? dto.getAnio_fin() : educacion.getAnio_fin());
-//            educacion.setImg_url((!dto.getImg_url().isEmpty()) ? dto.getImg_url() : educacion.getImg_url());
+            educacion.setImg_url_logo((!dto.getImg_url_logo().isEmpty()) ? dto.getImg_url_logo() : educacion.getImg_url_logo());
 
-            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-            if (imagenIdentidadOpt.isPresent()) {
-                educacion.setImagenIdentidad((dto.getImagenIdentidad() != null) ? imagenIdentidadOpt.get() : educacion.getImagenIdentidad());
-            }
+//            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//            if (imagenIdentidadOpt.isPresent()) {
+//                educacion.setImagenIdentidad((dto.getImagenIdentidad() != null) ? imagenIdentidadOpt.get() : educacion.getImagenIdentidad());
+//            }
             educacionRepositorio.save(educacion);
 
             return educacion;

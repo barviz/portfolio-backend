@@ -14,7 +14,7 @@ public class ProyectoDto {
     private String descripcion;
     private String link;
     private Integer anio;
-//    private String img_url;
-    private Long imagenIdentidad;
+    private String img_url_logo;
+//    private Long imagenIdentidad;
 
 }

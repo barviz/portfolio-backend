@@ -14,33 +14,35 @@ import org.springframework.web.bind.annotation.*;
  * @author Barbara
  */
 @RestController
+@RequestMapping("/tecnologia")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TecnologiaControlador {
     
     @Autowired
     private TecnologiaServicioImplementacion tecnologiaServicioImplementacion;
 
-    @PostMapping(path = "/tecnologia")
+    @PostMapping(path = "/crear")
     public ResponseEntity<Tecnologia> crearTecnologia(@RequestBody TecnologiaDto dto) {
         return new ResponseEntity<Tecnologia>(tecnologiaServicioImplementacion.crearTecnologia(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/tecnologia")
+    @PutMapping(path = "/actualizar")
     public ResponseEntity<Tecnologia> actualizarTecnologia(@RequestBody TecnologiaDto dto) {
         return new ResponseEntity<Tecnologia>(tecnologiaServicioImplementacion.actualizarTecnologia(dto), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/tecnologia/{id}")
-    public ResponseEntity<String> eliminarTecnologia(@PathVariable Long id) {
+    @DeleteMapping(path = "/eliminar/{id}")
+    public ResponseEntity<?> eliminarTecnologia(@PathVariable("id") Long id) {
         tecnologiaServicioImplementacion.eliminarTecnologia(id);
-        return new ResponseEntity<>("Tecnologia eliminada", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/tecnologia/lista")
+    @GetMapping(path = "/listar")
     public ResponseEntity<List> listarTecnologia() {
         return new ResponseEntity<>(tecnologiaServicioImplementacion.listarTecnologia(), HttpStatus.OK);
     }
     
-    @GetMapping(path = "/tecnologia/{id}")
+    @GetMapping(path = "/buscar/{id}")
     public ResponseEntity<Tecnologia> buscarTecnologiaPorId(@PathVariable Long id) {
         return new ResponseEntity<>(tecnologiaServicioImplementacion.buscarTecnologiaPorId(id), HttpStatus.ACCEPTED);
     }

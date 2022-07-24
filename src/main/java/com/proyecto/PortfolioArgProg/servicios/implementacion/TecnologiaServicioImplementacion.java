@@ -1,9 +1,7 @@
 package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
 import com.proyecto.PortfolioArgProg.dtos.TecnologiaDto;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
 import com.proyecto.PortfolioArgProg.entidades.Tecnologia;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
 import com.proyecto.PortfolioArgProg.repositorios.TecnologiaRepositorio;
 import com.proyecto.PortfolioArgProg.servicios.interfaces.TecnologiaServicioInterfaz;
 import java.util.List;
@@ -21,8 +19,8 @@ public class TecnologiaServicioImplementacion implements TecnologiaServicioInter
     @Autowired
     public TecnologiaRepositorio tecnologiaRepositorio;
 
-    @Autowired
-    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//    @Autowired
+//    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
 
     @Override
     public Tecnologia crearTecnologia(TecnologiaDto dto) {
@@ -31,12 +29,12 @@ public class TecnologiaServicioImplementacion implements TecnologiaServicioInter
 
         tecnologia.setNombre(dto.getNombre());
         tecnologia.setPorcentaje(dto.getPorcentaje());
-//        tecnologia.setImg_url(dto.getImg_url());
+        tecnologia.setImg_url_logo(dto.getImg_url_logo());
 
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-        if (imagenIdentidadOpt.isPresent()) {
-            tecnologia.setImagenIdentidad(imagenIdentidadOpt.get());
-        }
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//        if (imagenIdentidadOpt.isPresent()) {
+//            tecnologia.setImagenIdentidad(imagenIdentidadOpt.get());
+//        }
 
         tecnologiaRepositorio.save(tecnologia);
 
@@ -54,12 +52,12 @@ public class TecnologiaServicioImplementacion implements TecnologiaServicioInter
 
             tecnologia.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : tecnologia.getNombre());
             tecnologia.setPorcentaje((!dto.getPorcentaje().isEmpty()) ? dto.getPorcentaje(): tecnologia.getPorcentaje());
-//            tecnologia.setImg_url((!dto.getImg_url().isEmpty()) ? dto.getImg_url() : tecnologia.getImg_url());
+            tecnologia.setImg_url_logo((!dto.getImg_url_logo().isEmpty()) ? dto.getImg_url_logo() : tecnologia.getImg_url_logo());
             
-            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-            if (imagenIdentidadOpt.isPresent()) {
-                tecnologia.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():tecnologia.getImagenIdentidad());
-            }
+//            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//            if (imagenIdentidadOpt.isPresent()) {
+//                tecnologia.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():tecnologia.getImagenIdentidad());
+//            }
 
                 tecnologiaRepositorio.save(tecnologia);
 

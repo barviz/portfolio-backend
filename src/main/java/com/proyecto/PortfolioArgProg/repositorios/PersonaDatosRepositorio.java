@@ -1,6 +1,6 @@
 package com.proyecto.PortfolioArgProg.repositorios;
 
-import com.proyecto.PortfolioArgProg.entidades.Persona;
+import com.proyecto.PortfolioArgProg.entidades.PersonaDatos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author Barbara
  */
 @Repository
-public interface PersonaRepositorio extends JpaRepository<Persona, Long> {
+public interface PersonaDatosRepositorio extends JpaRepository<PersonaDatos, Long> {
     
 }

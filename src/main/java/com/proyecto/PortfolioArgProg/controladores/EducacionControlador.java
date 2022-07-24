@@ -14,33 +14,35 @@ import org.springframework.web.bind.annotation.*;
  * @author Barbara
  */
 @RestController
+@RequestMapping("/educacion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EducacionControlador {
     
     @Autowired
     private EducacionServicioImplementacion educacionServicioImplementacion;
 
-    @PostMapping(path = "/educacion")
+    @PostMapping(path = "/crear")
     public ResponseEntity<Educacion> crearEducacion(@RequestBody EducacionDto dto) {
         return new ResponseEntity<Educacion>(educacionServicioImplementacion.crearEducacion(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/educacion")
+    @PutMapping(path = "/actualizar")
     public ResponseEntity<Educacion> actualizarEducacion(@RequestBody EducacionDto dto) {
         return new ResponseEntity<Educacion>(educacionServicioImplementacion.actualizarEducacion(dto), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/educacion/{id}")
-    public ResponseEntity<String> eliminarEducacion(@PathVariable Long id) {
+    @DeleteMapping(path = "/eliminar/{id}")
+    public ResponseEntity<?> eliminarEducacion(@PathVariable("id") Long id) {
         educacionServicioImplementacion.eliminarEducacion(id);
-        return new ResponseEntity<>("Educacion eliminada", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/educacion/lista")
+    @GetMapping(path = "/listar")
     public ResponseEntity<List> listarEducacion() {
         return new ResponseEntity<>(educacionServicioImplementacion.listarEducacion(), HttpStatus.OK);
     }
     
-    @GetMapping(path = "/educacion/{id}")
+    @GetMapping(path = "/buscar/{id}")
     public ResponseEntity<Educacion> buscarEducacionPorId(@PathVariable Long id) {
         return new ResponseEntity<>(educacionServicioImplementacion.buscarEducacionPorId(id), HttpStatus.ACCEPTED);
     }

@@ -14,33 +14,35 @@ import org.springframework.web.bind.annotation.*;
  * @author Barbara
  */
 @RestController
+@RequestMapping("/experiencia")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ExperienciaControlador {
     
     @Autowired
     private ExperienciaServicioImplementacion experienciaServicioImplementacion;
 
-    @PostMapping(path = "/experiencia")
+    @PostMapping(path = "/crear")
     public ResponseEntity<Experiencia> crearExperiencia(@RequestBody ExperienciaDto dto) {
         return new ResponseEntity<Experiencia>(experienciaServicioImplementacion.crearExperiencia(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/experiencia")
+    @PutMapping(path = "/actualizar")
     public ResponseEntity<Experiencia> actualizarExperiencia(@RequestBody ExperienciaDto dto) {
         return new ResponseEntity<Experiencia>(experienciaServicioImplementacion.actualizarExperiencia(dto), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/experiencia/{id}")
-    public ResponseEntity<String> eliminarExperiencia(@PathVariable Long id) {
+    @DeleteMapping(path = "/eliminar/{id}")
+    public ResponseEntity<?> eliminarExperiencia(@PathVariable("id") Long id) {
         experienciaServicioImplementacion.eliminarExperiencia(id);
-        return new ResponseEntity<>("Experiencia eliminada", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/experiencia/lista")
+    @GetMapping(path = "/listar")
     public ResponseEntity<List> listarExperiencia() {
         return new ResponseEntity<>(experienciaServicioImplementacion.listarExperiencia(), HttpStatus.OK);
     }
     
-    @GetMapping(path = "/experiencia/{id}")
+    @GetMapping(path = "/buscar/{id}")
     public ResponseEntity<Experiencia> buscarExperienciaPorId(@PathVariable Long id) {
         return new ResponseEntity<>(experienciaServicioImplementacion.buscarExperienciaPorId(id), HttpStatus.ACCEPTED);
     }

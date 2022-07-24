@@ -1,77 +1,71 @@
 package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
-import com.proyecto.PortfolioArgProg.dtos.PersonaDto;
-import com.proyecto.PortfolioArgProg.entidades.ImagenBanner;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
-import com.proyecto.PortfolioArgProg.entidades.Persona;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenBannerRepositorio;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
-import com.proyecto.PortfolioArgProg.repositorios.PersonaRepositorio;
+import com.proyecto.PortfolioArgProg.dtos.PersonaDatosDto;
+import com.proyecto.PortfolioArgProg.entidades.PersonaDatos;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.proyecto.PortfolioArgProg.servicios.interfaces.PersonaServicioInterfaz;
 import java.util.Optional;
+import com.proyecto.PortfolioArgProg.repositorios.PersonaDatosRepositorio;
+import com.proyecto.PortfolioArgProg.servicios.interfaces.PersonaDatosServicioInterfaz;
 
 /**
  *
  * @author Barbara
  */
 @Service
-public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
+public class PersonaDatosServicioImplementacion implements PersonaDatosServicioInterfaz {
 
     @Autowired
-    public PersonaRepositorio personaRepositorio;
+    public PersonaDatosRepositorio personaDatosRepositorio;
 
-    @Autowired
-    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
-
-    @Autowired
-    public ImagenBannerRepositorio imagenBannerRepositorio;
+//    @Autowired
+//    public ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//
+//    @Autowired
+//    public ImagenBannerRepositorio imagenBannerRepositorio;
 
     @Override
-    public Persona crearPersona(PersonaDto dto) {
+    public PersonaDatos crearPersonaDatos(PersonaDatosDto dto) {
 
-        Persona persona = new Persona();
+        PersonaDatos personaDatos = new PersonaDatos();
 
-        persona.setNombre(dto.getNombre());
-        persona.setApellido(dto.getApellido());
-        persona.setTitulo(dto.getTitulo());
-        persona.setUbicacion(dto.getUbicacion());
-        persona.setDescripcion(dto.getDescripcion());
-//        persona.setImg_url_perfil(dto.getImg_url_perfil());
-//        persona.setImg_url_banner(dto.getImg_url_banner());
+        personaDatos.setNombre(dto.getNombre());
+        personaDatos.setApellido(dto.getApellido());
+        personaDatos.setTitulo(dto.getTitulo());
+        personaDatos.setUbicacion(dto.getUbicacion());
+        personaDatos.setImg_url_perfil(dto.getImg_url_perfil());
+        personaDatos.setImg_url_banner(dto.getImg_url_banner());
 
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-        if (imagenIdentidadOpt.isPresent()) {
-            persona.setImagenIdentidad(imagenIdentidadOpt.get());
-        }
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//        if (imagenIdentidadOpt.isPresent()) {
+//            persona.setImagenIdentidad(imagenIdentidadOpt.get());
+//        }
+//
+//        Optional<ImagenBanner> imagenBannerOpt = imagenBannerRepositorio.findById(dto.getImagenBanner());
+//        if (imagenBannerOpt.isPresent()) {
+//            persona.setImagenBanner(imagenBannerOpt.get());
+//        }
+        personaDatosRepositorio.save(personaDatos);
 
-        Optional<ImagenBanner> imagenBannerOpt = imagenBannerRepositorio.findById(dto.getImagenBanner());
-        if (imagenBannerOpt.isPresent()) {
-            persona.setImagenBanner(imagenBannerOpt.get());
-        }
-        personaRepositorio.save(persona);
-
-        return persona;
+        return personaDatos;
     }
 
     @Override
-    public Persona actualizarPersona(PersonaDto dto) {
+    public PersonaDatos actualizarPersonaDatos(PersonaDatosDto dto) {
 
-        Optional<Persona> personaOpt = personaRepositorio.findById(dto.getId());
+        Optional<PersonaDatos> personaDatosOpt = personaDatosRepositorio.findById(dto.getId());
 
-        if (personaOpt.isPresent()) {
+        if (personaDatosOpt.isPresent()) {
 
-            Persona persona = personaOpt.get();
+            PersonaDatos personaDatos = personaDatosOpt.get();
 
-            persona.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : persona.getNombre());
-            persona.setApellido((!dto.getApellido().isEmpty()) ? dto.getApellido() : persona.getApellido());
-            persona.setTitulo((!dto.getTitulo().isEmpty()) ? dto.getTitulo() : persona.getTitulo());
-            persona.setUbicacion((!dto.getUbicacion().isEmpty()) ? dto.getUbicacion() : persona.getUbicacion());
-            persona.setDescripcion((!dto.getDescripcion().isEmpty()) ? dto.getDescripcion() : persona.getDescripcion());
-//            persona.setImg_url_perfil((!dto.getImg_url_perfil().isEmpty()) ? dto.getImg_url_perfil() : persona.getImg_url_perfil());
-//            persona.setImg_url_banner((!dto.getImg_url_banner().isEmpty()) ? dto.getImg_url_banner() : persona.getImg_url_banner());
+            personaDatos.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : personaDatos.getNombre());
+            personaDatos.setApellido((!dto.getApellido().isEmpty()) ? dto.getApellido() : personaDatos.getApellido());
+            personaDatos.setTitulo((!dto.getTitulo().isEmpty()) ? dto.getTitulo() : personaDatos.getTitulo());
+            personaDatos.setUbicacion((!dto.getUbicacion().isEmpty()) ? dto.getUbicacion() : personaDatos.getUbicacion());
+            personaDatos.setImg_url_perfil((!dto.getImg_url_perfil().isEmpty()) ? dto.getImg_url_perfil() : personaDatos.getImg_url_perfil());
+            personaDatos.setImg_url_banner((!dto.getImg_url_banner().isEmpty()) ? dto.getImg_url_banner() : personaDatos.getImg_url_banner());
             
 //            persona.setImagenIdentidad(persona.getImagenIdentidad());
 //            persona.setImagenBanner(persona.getImagenBanner());
@@ -79,43 +73,43 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 ////            persona.setImagenIdentidad((dto.getImagenIdentidadID()!=null)?dto.getImagenIdentidadID():persona.getImagenIdentidad());
 ////            persona.setImagenBanner((dto.getImagenBannerID()!=null)?dto.getImagenBannerID() : persona.getImagenBanner());
 ////
-            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
-            if (imagenIdentidadOpt.isPresent()) {
-                persona.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():persona.getImagenIdentidad());
-            }
+//            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());
+//            if (imagenIdentidadOpt.isPresent()) {
+//                persona.setImagenIdentidad((dto.getImagenIdentidad()!=null)?imagenIdentidadOpt.get():persona.getImagenIdentidad());
+//            }
 
-            Optional<ImagenBanner> imagenBannerOpt = imagenBannerRepositorio.findById(dto.getImagenBanner());
-            if (imagenBannerOpt.isPresent()) {
-                persona.setImagenBanner((dto.getImagenBanner() != null) ? imagenBannerOpt.get() : persona.getImagenBanner());
-            }
+//            Optional<ImagenBanner> imagenBannerOpt = imagenBannerRepositorio.findById(dto.getImagenBanner());
+//            if (imagenBannerOpt.isPresent()) {
+//                persona.setImagenBanner((dto.getImagenBanner() != null) ? imagenBannerOpt.get() : persona.getImagenBanner());
+//            }
 
-                personaRepositorio.save(persona);
+                personaDatosRepositorio.save(personaDatos);
 
-                return persona;
+                return personaDatos;
             }
             
         return null;
     }
 
     @Override
-    public void eliminarPersona(Long id) {
-        Optional<Persona> personaOpt = personaRepositorio.findById(id);
-        if (personaOpt.isPresent()) {
-            personaRepositorio.delete(personaOpt.get());
+    public void eliminarPersonaDatos(Long id) {
+        Optional<PersonaDatos> personaDatosOpt = personaDatosRepositorio.findById(id);
+        if (personaDatosOpt.isPresent()) {
+            personaDatosRepositorio.delete(personaDatosOpt.get());
         }
     }
 
     @Override
-    public List<Persona> listarPersonas() {
-        List<Persona> persona = personaRepositorio.findAll();
-        return persona;
+    public List<PersonaDatos> listarPersonaDatos() {
+        List<PersonaDatos> personaDatos = personaDatosRepositorio.findAll();
+        return personaDatos;
     }
 
     @Override
-    public Persona buscarPersonaPorId(Long id) {
-        Optional<Persona> personaOpt = personaRepositorio.findById(id);
-        if (personaOpt.isPresent()) {
-            return personaOpt.get();
+    public PersonaDatos buscarPersonaDatosPorId(Long id) {
+        Optional<PersonaDatos> personaDatosOpt = personaDatosRepositorio.findById(id);
+        if (personaDatosOpt.isPresent()) {
+            return personaDatosOpt.get();
         }
         return null;
     }
@@ -170,7 +164,7 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 
 
 // @Autowired
-//    private PersonaRepositorio personaRepositorio;
+//    private PersonaDatosRepositorio personaRepositorio;
 //    
 //    //vinculo los servicios de las imagenes con el servicio de usuario
 //    
@@ -181,11 +175,11 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 //    private ImagenBannerServicio imagenBannerServicio;
 //
 //    @Transactional
-//    public Persona crearPersona(MultipartFile archivo1, MultipartFile archivo2,String nombre, String apellido, String titulo, String ubicacion) throws ErrorServicio {
+//    public PersonaDatos crearPersona(MultipartFile archivo1, MultipartFile archivo2,String nombre, String apellido, String titulo, String ubicacion) throws ErrorServicio {
 //
 //        validaciones(nombre, apellido, titulo, ubicacion);
 //
-//        Persona persona = new Persona();
+//        PersonaDatos persona = new PersonaDatos();
 //        persona.setNombre(nombre);
 //        persona.setApellido(apellido);
 //        persona.setTitulo(titulo);
@@ -208,7 +202,7 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 //        Optional<Persona> respuesta = personaRepositorio.findById(id);
 //
 //        if (respuesta.isPresent()) {
-//            Persona persona = respuesta.get();
+//            PersonaDatos persona = respuesta.get();
 //
 //            persona.setNombre(nombre);
 //            persona.setApellido(apellido);
@@ -244,12 +238,12 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 //    }
 //
 //    @Transactional(readOnly = true)
-//    public Persona buscarPersonaPorId(Long id) throws ErrorServicio {
+//    public PersonaDatos buscarPersonaPorId(Long id) throws ErrorServicio {
 //
 //        Optional<Persona> respuesta = personaRepositorio.findById(id);
 //
 //        if (respuesta.isPresent()) {
-//            Persona persona = respuesta.get();
+//            PersonaDatos persona = respuesta.get();
 //
 //            return persona;
 //        } else {
@@ -284,7 +278,7 @@ public class PersonaServicioImplementacion implements PersonaServicioInterfaz {
 //        }
 //    }
 //    @Override
-//    public void editarPersona(Long id, Persona persona) {
+//    public void editarPersona(Long id, PersonaDatos persona) {
 //
 //        Optional<Persona> respuesta = personaRepositorio.findById(id);
 //

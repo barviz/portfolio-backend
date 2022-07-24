@@ -37,12 +37,12 @@ public class Proyecto {
     @Column(name = "proyecto_anio")
     private Integer anio;
 
-//    @Column(name = "proyecto_img_url", length = 200, nullable = false)
-//    private String img_url;
+    @Column(name = "proyecto_img_url_logo", length = 200, nullable = false)
+    private String img_url_logo;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "imagen_identidad_id", nullable = true)
-    private ImagenIdentidad imagenIdentidad;
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "imagen_identidad_id", nullable = true)
+//    private ImagenIdentidad imagenIdentidad;
     
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "persona_id", nullable = true)

@@ -1,96 +1,96 @@
 package com.proyecto.PortfolioArgProg.servicios.implementacion;
 
-import com.proyecto.PortfolioArgProg.dtos.ImagenIdentidadDto;
-import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
-import com.proyecto.PortfolioArgProg.entidades.Persona;
-import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
-import com.proyecto.PortfolioArgProg.repositorios.PersonaRepositorio;
-import com.proyecto.PortfolioArgProg.servicios.interfaces.ImagenIdentidadServicioInterfaz;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+//import com.proyecto.PortfolioArgProg.dtos.ImagenIdentidadDto;
+//import com.proyecto.PortfolioArgProg.entidades.ImagenIdentidad;
+//import com.proyecto.PortfolioArgProg.entidades.Persona;
+//import com.proyecto.PortfolioArgProg.repositorios.ImagenIdentidadRepositorio;
+//import com.proyecto.PortfolioArgProg.repositorios.PersonaRepositorio;
+//import com.proyecto.PortfolioArgProg.servicios.interfaces.ImagenIdentidadServicioInterfaz;
+//import java.util.List;
+//import java.util.Optional;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Barbara
  */
-@Service
-public class ImagenIdentidadServicioImplementacion implements ImagenIdentidadServicioInterfaz {
+//@Service
+public class ImagenIdentidadServicioImplementacion /*implements ImagenIdentidadServicioInterfaz*/ {
 
-    @Autowired
-    private ImagenIdentidadRepositorio imagenIdentidadRepositorio;
-    
-    @Autowired
-    public PersonaRepositorio personaRepositorio;
-
-    @Override
-    public ImagenIdentidad crearImagenIdentidad(ImagenIdentidadDto dto) {
-
-        ImagenIdentidad imagenIdentidad = new ImagenIdentidad();
-
-        imagenIdentidad.setMime(dto.getMime());
-        imagenIdentidad.setNombre(dto.getNombre());
-        imagenIdentidad.setContenido(dto.getContenido());
-        
-//        Optional<Persona> personaOpt = personaRepositorio.findById(dto.getPersona());
-//        if (personaOpt.isPresent()) {
-//            imagenIdentidad.setPersona(personaOpt.get());
+//    @Autowired
+//    private ImagenIdentidadRepositorio imagenIdentidadRepositorio;
+//    
+//    @Autowired
+//    public PersonaRepositorio personaRepositorio;
+//
+//    @Override
+//    public ImagenIdentidad crearImagenIdentidad(ImagenIdentidadDto dto) {
+//
+//        ImagenIdentidad imagenIdentidad = new ImagenIdentidad();
+//
+//        imagenIdentidad.setMime(dto.getMime());
+//        imagenIdentidad.setNombre(dto.getNombre());
+//        imagenIdentidad.setContenido(dto.getContenido());
+//        
+////        Optional<Persona> personaOpt = personaRepositorio.findById(dto.getPersona());
+////        if (personaOpt.isPresent()) {
+////            imagenIdentidad.setPersona(personaOpt.get());
+////        }
+//
+//        imagenIdentidadRepositorio.save(imagenIdentidad);
+//
+//        return imagenIdentidad;
+//    }
+//
+//    @Override
+//    public ImagenIdentidad actualizarImagenIdentidad(ImagenIdentidadDto dto) {
+//
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getId());
+//
+//        if (imagenIdentidadOpt.isPresent()) {
+//
+//            ImagenIdentidad imagenIdentidad = imagenIdentidadOpt.get();
+//
+//            imagenIdentidad.setMime((!dto.getMime().isEmpty()) ? dto.getMime() : imagenIdentidad.getMime());
+//            imagenIdentidad.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : imagenIdentidad.getNombre());
+//            imagenIdentidad.setContenido((dto.getContenido() != null) ? dto.getContenido() : imagenIdentidad.getContenido());
+//           
+////            Optional<Persona> personaOpt = personaRepositorio.findById(dto.getPersona());
+////            if (personaOpt.isPresent()) {
+////                imagenIdentidad.setPersona((dto.getPersona()!=null)?personaOpt.get():imagenIdentidad.getPersona());
+////            }
+//
+//            imagenIdentidadRepositorio.save(imagenIdentidad);
+//
+//            return imagenIdentidad;
 //        }
-
-        imagenIdentidadRepositorio.save(imagenIdentidad);
-
-        return imagenIdentidad;
-    }
-
-    @Override
-    public ImagenIdentidad actualizarImagenIdentidad(ImagenIdentidadDto dto) {
-
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getId());
-
-        if (imagenIdentidadOpt.isPresent()) {
-
-            ImagenIdentidad imagenIdentidad = imagenIdentidadOpt.get();
-
-            imagenIdentidad.setMime((!dto.getMime().isEmpty()) ? dto.getMime() : imagenIdentidad.getMime());
-            imagenIdentidad.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : imagenIdentidad.getNombre());
-            imagenIdentidad.setContenido((dto.getContenido() != null) ? dto.getContenido() : imagenIdentidad.getContenido());
-           
-//            Optional<Persona> personaOpt = personaRepositorio.findById(dto.getPersona());
-//            if (personaOpt.isPresent()) {
-//                imagenIdentidad.setPersona((dto.getPersona()!=null)?personaOpt.get():imagenIdentidad.getPersona());
-//            }
-
-            imagenIdentidadRepositorio.save(imagenIdentidad);
-
-            return imagenIdentidad;
-        }
-
-        return null;
-    }
-
-    @Override
-    public void eliminarImagenIdentidad(Long id) {
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(id);
-        if (imagenIdentidadOpt.isPresent()) {
-            imagenIdentidadRepositorio.delete(imagenIdentidadOpt.get());
-        }
-    }
-
-    @Override
-    public List<ImagenIdentidad> listarImagenIdentidad() {
-        List<ImagenIdentidad> imagenIdentidad = imagenIdentidadRepositorio.findAll();
-        return imagenIdentidad;
-    }
-
-    @Override
-    public ImagenIdentidad buscarImagenIdentidadPorId(Long id) {
-        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(id);
-        if (imagenIdentidadOpt.isPresent()) {
-            return imagenIdentidadOpt.get();
-        }
-        return null;
-    }
+//
+//        return null;
+//    }
+//
+//    @Override
+//    public void eliminarImagenIdentidad(Long id) {
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(id);
+//        if (imagenIdentidadOpt.isPresent()) {
+//            imagenIdentidadRepositorio.delete(imagenIdentidadOpt.get());
+//        }
+//    }
+//
+//    @Override
+//    public List<ImagenIdentidad> listarImagenIdentidad() {
+//        List<ImagenIdentidad> imagenIdentidad = imagenIdentidadRepositorio.findAll();
+//        return imagenIdentidad;
+//    }
+//
+//    @Override
+//    public ImagenIdentidad buscarImagenIdentidadPorId(Long id) {
+//        Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(id);
+//        if (imagenIdentidadOpt.isPresent()) {
+//            return imagenIdentidadOpt.get();
+//        }
+//        return null;
+//    }
 
 }
 

@@ -15,6 +15,6 @@ public class ExperienciaDto {
     private String descripcion;
     private Integer anio_inicio;
     private Integer anio_fin;
-//    private String img_url;
-    private Long imagenIdentidad;
+    private String img_url_logo;
+//    private Long imagenIdentidad;
 }
