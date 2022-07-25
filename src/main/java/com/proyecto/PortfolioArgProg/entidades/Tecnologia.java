@@ -29,7 +29,7 @@ public class Tecnologia {
     private String nombre;
 
     @Column(name = "tecnologia_porcentaje")
-    private String porcentaje;
+    private Integer porcentaje;
 
     @Column(name = "tecnologia_img_url_logo", length = 200, nullable = false)
     private String img_url_logo;

@@ -51,7 +51,7 @@ public class TecnologiaServicioImplementacion implements TecnologiaServicioInter
             Tecnologia tecnologia = tecnologiaOpt.get();
 
             tecnologia.setNombre((!dto.getNombre().isEmpty()) ? dto.getNombre() : tecnologia.getNombre());
-            tecnologia.setPorcentaje((!dto.getPorcentaje().isEmpty()) ? dto.getPorcentaje(): tecnologia.getPorcentaje());
+            tecnologia.setPorcentaje((dto.getPorcentaje()!=null) ? dto.getPorcentaje(): tecnologia.getPorcentaje());
             tecnologia.setImg_url_logo((!dto.getImg_url_logo().isEmpty()) ? dto.getImg_url_logo() : tecnologia.getImg_url_logo());
             
 //            Optional<ImagenIdentidad> imagenIdentidadOpt = imagenIdentidadRepositorio.findById(dto.getImagenIdentidad());

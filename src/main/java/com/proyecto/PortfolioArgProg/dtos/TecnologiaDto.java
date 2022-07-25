@@ -11,7 +11,7 @@ public class TecnologiaDto {
 
     private Long id;
     private String nombre;
-    private String porcentaje;
+    private Integer porcentaje;
     private String img_url_logo;
 //    private Long imagenIdentidad;
 
