@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,16 +22,19 @@ public class ExperienciaControlador {
     @Autowired
     private ExperienciaServicioImplementacion experienciaServicioImplementacion;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/crear")
     public ResponseEntity<Experiencia> crearExperiencia(@RequestBody ExperienciaDto dto) {
         return new ResponseEntity<Experiencia>(experienciaServicioImplementacion.crearExperiencia(dto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/actualizar")
     public ResponseEntity<Experiencia> actualizarExperiencia(@RequestBody ExperienciaDto dto) {
         return new ResponseEntity<Experiencia>(experienciaServicioImplementacion.actualizarExperiencia(dto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/eliminar/{id}")
     public ResponseEntity<?> eliminarExperiencia(@PathVariable("id") Long id) {
         experienciaServicioImplementacion.eliminarExperiencia(id);

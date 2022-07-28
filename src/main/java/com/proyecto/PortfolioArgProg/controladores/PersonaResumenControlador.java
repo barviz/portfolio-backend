@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,16 +22,19 @@ public class PersonaResumenControlador {
     @Autowired
     private PersonaResumenServicioImplementacion personaResumenServicioImplementacion;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/crear")
     public ResponseEntity<PersonaResumen> crearPersonaResumen(@RequestBody PersonaResumenDto dto) {
         return new ResponseEntity<PersonaResumen>(personaResumenServicioImplementacion.crearPersonaResumen(dto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/actualizar")
     public ResponseEntity<PersonaResumen> actualizarPersonaResumen(@RequestBody PersonaResumenDto dto) {
         return new ResponseEntity<PersonaResumen>(personaResumenServicioImplementacion.actualizarPersonaResumen(dto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/eliminar/{id}")
     public ResponseEntity<?> eliminarPersonaResumen(@PathVariable("id") Long id) {
         personaResumenServicioImplementacion.eliminarPersonaResumen(id);

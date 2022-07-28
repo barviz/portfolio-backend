@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,16 +22,19 @@ public class ProyectoControlador {
     @Autowired
     private ProyectoServicioImplementacion proyectoServicioImplementacion;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/crear")
     public ResponseEntity<Proyecto> crearProyecto(@RequestBody ProyectoDto dto) {
         return new ResponseEntity<Proyecto>(proyectoServicioImplementacion.crearProyecto(dto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(path = "/actualizar")
     public ResponseEntity<Proyecto> actualizarProyecto(@RequestBody ProyectoDto dto) {
         return new ResponseEntity<Proyecto>(proyectoServicioImplementacion.actualizarProyecto(dto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/eliminar/{id}")
     public ResponseEntity<?> eliminarProyecto(@PathVariable("id") Long id) {
         proyectoServicioImplementacion.eliminarProyecto(id);
