@@ -16,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
  */
 @RestController
 @RequestMapping("/persona-datos")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-blv.web.app")
 public class PersonaDatosControlador {
 
     @Autowired
